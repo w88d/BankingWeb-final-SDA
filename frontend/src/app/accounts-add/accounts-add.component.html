@@ -1,0 +1,51 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+  </div>
+  <div class="button-row">
+    <a mat-flat-button color="primary" [routerLink]="['/accounts']"><mat-icon>arrow_back</mat-icon></a>
+    <h2 class="text-center">Add New Account</h2>
+
+  </div>
+  <mat-card class="example-card">
+    <form [formGroup]="classForm" (ngSubmit)="onFormSubmit()">
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Class Name" formControlName="name"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!classForm.get('name').valid && classForm.get('name').touched">Please enter Class Name</span>
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Account Number" formControlName="accountNum"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!classForm.get('accountNum').valid && classForm.get('accountNum').touched">Please enter Account Number</span>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="customer" formControlName="customer"
+               [errorStateMatcher]="matcher">
+        <mat-error>
+          <span *ngIf="!classForm.get('customer').valid && classForm.get('customer').touched">Please enter customer</span>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button type="submit" [disabled]="!classForm.valid" mat-flat-button color="primary"><mat-icon>save</mat-icon></button>
+      </div>
+      <div class="button-row">
+        <p *ngIf="submitErr">
+        <span *ngFor='let error of submitErrMsg | keyvalue'>
+		    {{error.key}} : {{error.value}} <br />
+		</span>
+        </p>
+      </div>
+    </form>
+  </mat-card>
+</div>
